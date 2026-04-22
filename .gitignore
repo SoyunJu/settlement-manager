@@ -22,3 +22,12 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# 환경변수
+.env
+
+# 로그
+logs/
+
+# QueryDSL 생성 파일
+build/generated/

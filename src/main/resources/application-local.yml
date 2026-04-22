@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:${POSTGRES_PORT:5532}/${DB_NAME:settlement}
+    username: ${DB_USER:settlement_user}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update   # 로컬: 스키마 자동 갱신
+    show-sql: true
+  data:
+    redis:
+      host: localhost
+      port: ${REDIS_PORT:6479}
+      password: ${REDIS_PASSWORD}
+
+logging:
+  level:
+    com.settlement.manager: DEBUG
+    org.springframework.security: DEBUG

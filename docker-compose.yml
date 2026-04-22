@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: settlement-postgres
+    environment:
+      POSTGRES_DB: ${DB_NAME:-settlement}
+      POSTGRES_USER: ${DB_USER:-settlement_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "${POSTGRES_PORT:-5532}:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-settlement_user} -d ${DB_NAME:-settlement}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7
+    container_name: settlement-redis
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    ports:
+      - "${REDIS_PORT:-6479}:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres-data:
+  redis-data:
