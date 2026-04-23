@@ -6,6 +6,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import com.settlement.manager.domain.feerate.entity.CreatorGrade;
 
 import java.time.Instant;
 
@@ -30,6 +31,9 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
+
+    @Enumerated(EnumType.STRING)
+    private CreatorGrade grade;
 
     // 로그인 실패 잠금 관련 필드
     private int loginFailCount;
