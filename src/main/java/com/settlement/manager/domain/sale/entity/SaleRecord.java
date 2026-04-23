@@ -54,6 +54,7 @@ public class SaleRecord extends BaseEntity {
         this.creatorId = creatorId;
         this.courseId = courseId;
         this.studentId = studentId;
+        this.amount = amount;
         setPaidAt(paidAt);
     }
 
