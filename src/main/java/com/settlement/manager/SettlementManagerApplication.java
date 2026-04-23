@@ -11,6 +11,11 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class SettlementManagerApplication {
 
     public static void main(String[] args) {
+
+        System.out.println("=== WORKING DIR: " + System.getProperty("user.dir"));
+        System.out.println("=== JWT_SECRET: " + System.getenv("JWT_SECRET"));
+
         SpringApplication.run(SettlementManagerApplication.class, args);
     }
+
 }

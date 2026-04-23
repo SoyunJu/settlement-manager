@@ -34,6 +34,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-batch")
+    implementation("me.paulschwarz:spring-dotenv:4.0.0")
 
     // PostgreSQL
     runtimeOnly("org.postgresql:postgresql")
@@ -92,9 +93,7 @@ sourceSets {
 dependencyCheck {
     failBuildOnCVSS = 7.0f
     formats = listOf("HTML", "JSON")
-    nvd {
-        apiKey = System.getenv("NVD_API_KEY") ?: ""
-    }
+    nvd.apiKey = System.getenv("NVD_API_KEY") ?: ""
 }
 
 tasks.withType<Test> {
