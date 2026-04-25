@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.batch.core.*;
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
@@ -54,6 +55,7 @@ public class SettlementExportJobConfig {
     }
 
     @Bean
+    @StepScope
     public ListItemReader<Settlement> exportReader(
             @org.springframework.beans.factory.annotation.Value("#{jobParameters['yearMonth']}") String yearMonth) {
         if (yearMonth == null) return new ListItemReader<>(List.of());
@@ -82,6 +84,7 @@ public class SettlementExportJobConfig {
     }
 
     @Bean
+    @StepScope
     public ItemWriter<String> csvWriter(
             @org.springframework.beans.factory.annotation.Value("#{jobParameters['yearMonth']}") String yearMonth) {
         return chunk -> {
@@ -120,6 +123,7 @@ public class SettlementExportJobConfig {
     }
 
     @Bean
+    @StepScope
     public ItemWriter<Settlement> excelWriter(
             @org.springframework.beans.factory.annotation.Value("#{jobParameters['yearMonth']}") String yearMonth) {
         return chunk -> {
