@@ -37,9 +37,9 @@ public class BatchJobScheduler {
                     .addString("runAt", LocalDateTime.now().toString())
                     .toJobParameters();
             JobExecution execution = jobLauncher.run(monthlySettlementJob, params);
-            log.info("스케줄러 월별 정산 완료. yearMonth={} status={}", yearMonth, execution.getStatus());
+            log.info("전월 정산 완료. yearMonth={} status={}", yearMonth, execution.getStatus());
         } catch (Exception e) {
-            log.error("스케줄러 월별 정산 실패. yearMonth={}", yearMonth, e);
+            log.error("전월 정산 실패. yearMonth={}", yearMonth, e);
         }
     }
 }
