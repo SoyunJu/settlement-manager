@@ -1,0 +1,16 @@
+.button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    font-weight: 500;
+    transition: opacity 0.15s;
+}
+
+.button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.primary { background-color: var(--color-primary); color: #fff; }
+.success { background-color: var(--color-success); color: #fff; }
+.outline { background-color: transparent; border: 1px solid var(--color-border); color: #333; }
