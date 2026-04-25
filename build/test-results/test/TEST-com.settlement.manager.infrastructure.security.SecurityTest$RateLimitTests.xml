@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="A07 - Rate Limiting" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-04-25T10:05:20" hostname="DESKTOP-M6T2B2N" time="0.155">
+  <properties/>
+  <testcase name="로그인 외 엔드포인트는 Rate Limit 미적용" classname="com.settlement.manager.infrastructure.security.SecurityTest$RateLimitTests" time="0.155"/>
+  <system-out><![CDATA[2026-04-25T19:05:20.787+09:00  INFO 18264 --- [settlement-manager] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.settlement.manager.infrastructure.security.SecurityTest$RateLimitTests]: RateLimitTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-04-25T19:05:20.790+09:00  INFO 18264 --- [settlement-manager] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.settlement.manager.SettlementManagerApplication for test class com.settlement.manager.infrastructure.security.SecurityTest$RateLimitTests
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

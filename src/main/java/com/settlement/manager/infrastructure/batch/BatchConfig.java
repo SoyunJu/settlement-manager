@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 @Configuration
 public class BatchConfig {
 
-    @Bean
+    /* @Bean
     public JobRepository jobRepository(DataSource dataSource,
                                        PlatformTransactionManager transactionManager) throws Exception {
         JobRepositoryFactoryBean factory = new JobRepositoryFactoryBean();
@@ -21,4 +21,5 @@ public class BatchConfig {
         factory.afterPropertiesSet();
         return factory.getObject();
     }
+    */
 }

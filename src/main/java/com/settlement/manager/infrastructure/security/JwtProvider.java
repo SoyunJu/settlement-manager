@@ -3,7 +3,10 @@ package com.settlement.manager.infrastructure.security;
 import com.settlement.manager.common.exception.BusinessException;
 import com.settlement.manager.common.exception.ErrorCode;
 import com.settlement.manager.domain.user.entity.Role;
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -58,7 +61,7 @@ public class JwtProvider {
                     .getPayload();
         } catch (ExpiredJwtException e) {
             throw new BusinessException(ErrorCode.TOKEN_EXPIRED);
-        } catch (JwtException e) {
+        } catch (JwtException | IllegalArgumentException e) {
             throw new BusinessException(ErrorCode.INVALID_TOKEN);
         }
     }

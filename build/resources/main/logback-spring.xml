@@ -3,6 +3,7 @@
 
     <property name="LOG_DIR" value="logs"/>
 
+
     <property name="INFO_PATTERN"
               value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%X{traceId}] %logger{30} - %msg%n"/>
     <property name="ERROR_PATTERN"
@@ -26,7 +27,7 @@
             <onMismatch>DENY</onMismatch>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_DIR}/settlement/%d{yyyy}/%d{MM}/%d{yyyy-MM-dd}-info.log</fileNamePattern>
+            <fileNamePattern>${LOG_DIR}/settlement/%d{yyyy/MM/yyyy-MM-dd}-info.log</fileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder><pattern>${INFO_PATTERN}</pattern></encoder>
@@ -40,7 +41,7 @@
             <onMismatch>DENY</onMismatch>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_DIR}/settlement/%d{yyyy}/%d{MM}/%d{yyyy-MM-dd}-error.log</fileNamePattern>
+            <fileNamePattern>${LOG_DIR}/settlement/%d{yyyy/MM/yyyy-MM-dd}-error.log</fileNamePattern>
             <maxHistory>90</maxHistory>
         </rollingPolicy>
         <encoder><pattern>${ERROR_PATTERN}</pattern></encoder>
@@ -55,7 +56,7 @@
             <onMismatch>DENY</onMismatch>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_DIR}/sale/%d{yyyy}/%d{MM}/%d{yyyy-MM-dd}-info.log</fileNamePattern>
+            <fileNamePattern>${LOG_DIR}/sale/%d{yyyy/MM/yyyy-MM-dd}-info.log</fileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder><pattern>${INFO_PATTERN}</pattern></encoder>
@@ -69,7 +70,7 @@
             <onMismatch>DENY</onMismatch>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_DIR}/sale/%d{yyyy}/%d{MM}/%d{yyyy-MM-dd}-error.log</fileNamePattern>
+            <fileNamePattern>${LOG_DIR}/sale/%d{yyyy/MM/yyyy-MM-dd}-error.log</fileNamePattern>
             <maxHistory>90</maxHistory>
         </rollingPolicy>
         <encoder><pattern>${ERROR_PATTERN}</pattern></encoder>
@@ -84,7 +85,7 @@
             <onMismatch>DENY</onMismatch>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_DIR}/admin/%d{yyyy}/%d{MM}/%d{yyyy-MM-dd}-info.log</fileNamePattern>
+            <fileNamePattern>${LOG_DIR}/admin/%d{yyyy/MM/yyyy-MM-dd}-info.log</fileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder><pattern>${INFO_PATTERN}</pattern></encoder>
@@ -98,7 +99,7 @@
             <onMismatch>DENY</onMismatch>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_DIR}/admin/%d{yyyy}/%d{MM}/%d{yyyy-MM-dd}-error.log</fileNamePattern>
+            <fileNamePattern>${LOG_DIR}/admin/%d{yyyy/MM/yyyy-MM-dd}-error.log</fileNamePattern>
             <maxHistory>90</maxHistory>
         </rollingPolicy>
         <encoder><pattern>${ERROR_PATTERN}</pattern></encoder>
@@ -108,7 +109,7 @@
     <appender name="AUDIT" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_DIR}/audit/audit.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_DIR}/audit/%d{yyyy}/%d{MM}/%d{yyyy-MM-dd}-audit.log</fileNamePattern>
+            <fileNamePattern>${LOG_DIR}/audit/%d{yyyy/MM/yyyy-MM-dd}-audit.log</fileNamePattern>
             <maxHistory>365</maxHistory>
         </rollingPolicy>
         <encoder><pattern>${ERROR_PATTERN}</pattern></encoder>
@@ -139,6 +140,7 @@
         <appender-ref ref="ADMIN_INFO"/>
         <appender-ref ref="ADMIN_ERROR"/>
     </logger>
+
 
     <logger name="AUDIT_LOGGER" level="INFO" additivity="false">
         <appender-ref ref="AUDIT"/>

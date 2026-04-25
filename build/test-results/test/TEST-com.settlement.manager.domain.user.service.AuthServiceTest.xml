@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.settlement.manager.domain.user.service.AuthServiceTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-04-25T08:23:50" hostname="DESKTOP-M6T2B2N" time="0.521">
+<testsuite name="com.settlement.manager.domain.user.service.AuthServiceTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-04-25T10:05:17" hostname="DESKTOP-M6T2B2N" time="0.385">
   <properties/>
-  <testcase name="잠긴 계정 로그인 시도 -&gt; 예외 처리" classname="com.settlement.manager.domain.user.service.AuthServiceTest" time="0.475"/>
-  <testcase name="로그인 실패 -&gt; failCount 증가" classname="com.settlement.manager.domain.user.service.AuthServiceTest" time="0.005"/>
-  <testcase name="로그인 성공 -&gt; 토큰 반환 및 failCount 초기화" classname="com.settlement.manager.domain.user.service.AuthServiceTest" time="0.008"/>
-  <testcase name="탈퇴한 계정 로그인 시도 -&gt; 예외 처리" classname="com.settlement.manager.domain.user.service.AuthServiceTest" time="0.004"/>
-  <testcase name="로그아웃 - 토큰 무효화" classname="com.settlement.manager.domain.user.service.AuthServiceTest" time="0.018"/>
-  <testcase name="5회 실패 -&gt; 계정 잠금" classname="com.settlement.manager.domain.user.service.AuthServiceTest" time="0.006"/>
-  <system-out><![CDATA[17:23:50.487 DEBUG [] o.s.t.util.ReflectionTestUtils - Setting field 'maxAttempts' of type [null] on target object [com.settlement.manager.domain.user.service.AuthService@452115b1] or target class [class com.settlement.manager.domain.user.service.AuthService] to value [5]
-17:23:50.504 DEBUG [] o.s.t.util.ReflectionTestUtils - Setting field 'maxAttempts' of type [null] on target object [com.settlement.manager.domain.user.service.AuthService@4b5c0183] or target class [class com.settlement.manager.domain.user.service.AuthService] to value [5]
-17:23:50.510 DEBUG [] o.s.t.util.ReflectionTestUtils - Setting field 'maxAttempts' of type [null] on target object [com.settlement.manager.domain.user.service.AuthService@14b0a826] or target class [class com.settlement.manager.domain.user.service.AuthService] to value [5]
-17:23:50.518 DEBUG [] o.s.t.util.ReflectionTestUtils - Setting field 'maxAttempts' of type [null] on target object [com.settlement.manager.domain.user.service.AuthService@6ec6adcc] or target class [class com.settlement.manager.domain.user.service.AuthService] to value [5]
-17:23:50.524 DEBUG [] o.s.t.util.ReflectionTestUtils - Setting field 'maxAttempts' of type [null] on target object [com.settlement.manager.domain.user.service.AuthService@2f024025] or target class [class com.settlement.manager.domain.user.service.AuthService] to value [5]
-17:23:50.543 DEBUG [] o.s.t.util.ReflectionTestUtils - Setting field 'maxAttempts' of type [null] on target object [com.settlement.manager.domain.user.service.AuthService@6492428e] or target class [class com.settlement.manager.domain.user.service.AuthService] to value [5]
+  <testcase name="잠긴 계정 로그인 시도 -&gt; 예외 처리" classname="com.settlement.manager.domain.user.service.AuthServiceTest" time="0.356"/>
+  <testcase name="로그인 실패 -&gt; failCount 증가" classname="com.settlement.manager.domain.user.service.AuthServiceTest" time="0.004"/>
+  <testcase name="로그인 성공 -&gt; 토큰 반환 및 failCount 초기화" classname="com.settlement.manager.domain.user.service.AuthServiceTest" time="0.004"/>
+  <testcase name="탈퇴한 계정 로그인 시도 -&gt; 예외 처리" classname="com.settlement.manager.domain.user.service.AuthServiceTest" time="0.002"/>
+  <testcase name="로그아웃 - 토큰 무효화" classname="com.settlement.manager.domain.user.service.AuthServiceTest" time="0.011"/>
+  <testcase name="5회 실패 -&gt; 계정 잠금" classname="com.settlement.manager.domain.user.service.AuthServiceTest" time="0.005"/>
+  <system-out><![CDATA[2026-04-25T19:05:17.639+09:00  WARN 18264 --- [settlement-manager] [    Test worker] c.s.m.domain.user.service.AuthService    : 로그인 실패. email=test@test.com failCount=1
+2026-04-25T19:05:17.643+09:00  INFO 18264 --- [settlement-manager] [    Test worker] c.s.m.domain.user.service.AuthService    : 로그인 성공. userId=null
+2026-04-25T19:05:17.649+09:00  INFO 18264 --- [settlement-manager] [    Test worker] c.s.m.domain.user.service.AuthService    : 로그아웃. userId=1
+2026-04-25T19:05:17.661+09:00  WARN 18264 --- [settlement-manager] [    Test worker] c.s.m.domain.user.service.AuthService    : 로그인 실패. email=test@test.com failCount=1
+2026-04-25T19:05:17.661+09:00  WARN 18264 --- [settlement-manager] [    Test worker] c.s.m.domain.user.service.AuthService    : 로그인 실패. email=test@test.com failCount=2
+2026-04-25T19:05:17.661+09:00  WARN 18264 --- [settlement-manager] [    Test worker] c.s.m.domain.user.service.AuthService    : 로그인 실패. email=test@test.com failCount=3
+2026-04-25T19:05:17.662+09:00  WARN 18264 --- [settlement-manager] [    Test worker] c.s.m.domain.user.service.AuthService    : 로그인 실패. email=test@test.com failCount=4
+2026-04-25T19:05:17.662+09:00  WARN 18264 --- [settlement-manager] [    Test worker] c.s.m.domain.user.service.AuthService    : 로그인 실패. email=test@test.com failCount=5
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

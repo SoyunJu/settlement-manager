@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.settlement.manager.domain.settlement.service.SettlementCalculatorTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-04-25T08:23:49" hostname="DESKTOP-M6T2B2N" time="0.123">
+<testsuite name="com.settlement.manager.domain.settlement.service.SettlementCalculatorTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-04-25T10:05:04" hostname="DESKTOP-M6T2B2N" time="0.12">
   <properties/>
-  <testcase name="수수료율 소수점 반올림 검증" classname="com.settlement.manager.domain.settlement.service.SettlementCalculatorTest" time="0.086"/>
-  <testcase name="2월 취소 -&gt; 2월 정산에서 차감 (기간 필터 검증)" classname="com.settlement.manager.domain.settlement.service.SettlementCalculatorTest" time="0.008"/>
-  <testcase name="부분 환불 -&gt; 환불액 &lt; 판매액" classname="com.settlement.manager.domain.settlement.service.SettlementCalculatorTest" time="0.007"/>
-  <testcase name="빈 월 예외 처리 -&gt; 판매/취소 없으면 0원 정산" classname="com.settlement.manager.domain.settlement.service.SettlementCalculatorTest" time="0.005"/>
-  <testcase name="정상 계산 -&gt; 판매 3건, 취소 1건, 수수료율 20%" classname="com.settlement.manager.domain.settlement.service.SettlementCalculatorTest" time="0.005"/>
+  <testcase name="수수료율 소수점 반올림 검증" classname="com.settlement.manager.domain.settlement.service.SettlementCalculatorTest" time="0.077"/>
+  <testcase name="2월 취소 -&gt; 2월 정산에서 차감 (기간 필터 검증)" classname="com.settlement.manager.domain.settlement.service.SettlementCalculatorTest" time="0.01"/>
+  <testcase name="부분 환불 -&gt; 환불액 &lt; 판매액" classname="com.settlement.manager.domain.settlement.service.SettlementCalculatorTest" time="0.005"/>
+  <testcase name="빈 월 예외 처리 -&gt; 판매/취소 없으면 0원 정산" classname="com.settlement.manager.domain.settlement.service.SettlementCalculatorTest" time="0.004"/>
+  <testcase name="정상 계산 -&gt; 판매 3건, 취소 1건, 수수료율 20%" classname="com.settlement.manager.domain.settlement.service.SettlementCalculatorTest" time="0.011"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
