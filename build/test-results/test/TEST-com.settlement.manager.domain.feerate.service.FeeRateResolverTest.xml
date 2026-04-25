@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.settlement.manager.domain.feerate.service.FeeRateResolverTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-04-25T08:23:49" hostname="DESKTOP-M6T2B2N" time="0.398">
+  <properties/>
+  <testcase name="등급별 수수료 override -&gt; GOLD 15%" classname="com.settlement.manager.domain.feerate.service.FeeRateResolverTest" time="0.379"/>
+  <testcase name="등급 override 없으면 -&gt; 기본 수수료율 적용" classname="com.settlement.manager.domain.feerate.service.FeeRateResolverTest" time="0.006"/>
+  <testcase name="DB에 히스토리 없으면 -&gt; 기본 수수료율" classname="com.settlement.manager.domain.feerate.service.FeeRateResolverTest" time="0.006"/>
+  <testcase name="grade null -&gt; 기본 수수료율" classname="com.settlement.manager.domain.feerate.service.FeeRateResolverTest" time="0.003"/>
+  <system-out><![CDATA[17:23:49.406 DEBUG [] o.r.connection.DNSMonitor - Request sent to resolve ip address for master host: localhost
+17:23:49.408 DEBUG [] o.r.connection.DNSMonitor - Resolved ip: localhost/127.0.0.1 for master host: localhost
+17:23:49.650 DEBUG [] o.s.t.util.ReflectionTestUtils - Setting field 'defaultFeeRate' of type [null] on target object [com.settlement.manager.domain.feerate.service.FeeRateResolver@76d28406] or target class [class com.settlement.manager.domain.feerate.service.FeeRateResolver] to value [0.20]
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.settlement.manager.domain.sale.service.SaleRecordServiceTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-04-25T08:23:49" hostname="DESKTOP-M6T2B2N" time="0.208">
+  <properties/>
+  <testcase name="환불액==결제액 -&gt; 허용 (전액 환불)" classname="com.settlement.manager.domain.sale.service.SaleRecordServiceTest" time="0.18"/>
+  <testcase name="ADMIN은 전체 판매 내역 조회 가능" classname="com.settlement.manager.domain.sale.service.SaleRecordServiceTest" time="0.005"/>
+  <testcase name="취소 IDOR 방지 -&gt; 타인의 판매 내역 취소시 FORBIDDEN" classname="com.settlement.manager.domain.sale.service.SaleRecordServiceTest" time="0.011"/>
+  <testcase name="환불액 &gt; 결제액 -&gt; 예외 처리" classname="com.settlement.manager.domain.sale.service.SaleRecordServiceTest" time="0.004"/>
+  <testcase name="IDOR 방지 -&gt; 타인의 판매 내역 조회 시 FORBIDDEN" classname="com.settlement.manager.domain.sale.service.SaleRecordServiceTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

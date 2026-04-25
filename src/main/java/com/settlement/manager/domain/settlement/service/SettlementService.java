@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.settlement.manager.infrastructure.audit.AuditLogger;
 
 @Slf4j
 @Service
@@ -21,6 +22,7 @@ public class SettlementService {
     private final SettlementRepository settlementRepository;
     private final SettlementCalculator settlementCalculator;
     private final UserRepository userRepository;
+    private final AuditLogger auditLogger;
 
     // 월별 정산 조회
     @Transactional
@@ -50,5 +52,37 @@ public class SettlementService {
                             creatorId, yearMonth, settlement.getSettlementAmount());
                     return SettlementResponse.from(settlement);
                 });
+    }
+
+    // 정산 확정 (PENDING -> CONFIRMED). 비관적 락으로 동시 확정 방지.
+    @Transactional
+    public SettlementResponse confirm(Long settlementId, Long currentUserId) {
+        Settlement settlement = settlementRepository.findByIdWithLock(settlementId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.SETTLEMENT_NOT_FOUND));
+
+        settlement.confirm();
+        auditLogger.log("SETTLEMENT_CONFIRM", currentUserId,
+                "settlementId=" + settlementId + " creatorId=" + settlement.getCreatorId()
+                        + " month=" + settlement.getYear() + "-" + settlement.getMonth());
+        log.info("정산 확정. settlementId={} creatorId={}", settlementId, settlement.getCreatorId());
+        return SettlementResponse.from(settlement);
+    }
+
+    // 정산 지급 완료 -> Mock 알림 로그. TODO: 실제 메신저나 이메일 연동
+    @Transactional
+    public SettlementResponse pay(Long settlementId, Long currentUserId) {
+        Settlement settlement = settlementRepository.findByIdWithLock(settlementId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.SETTLEMENT_NOT_FOUND));
+
+        settlement.pay();
+        auditLogger.log("SETTLEMENT_PAID", currentUserId,
+                "settlementId=" + settlementId + " creatorId=" + settlement.getCreatorId()
+                        + " amount=" + settlement.getSettlementAmount());
+
+        // PAID 전환 시 -> Mock 알림 로그 TODO: 실제 메신저나 이메일 연동
+        log.info("[NOTIFY] creatorId={} month={}-{} amount={}",
+                settlement.getCreatorId(), settlement.getYear(), settlement.getMonth(),
+                settlement.getSettlementAmount());
+        return SettlementResponse.from(settlement);
     }
 }

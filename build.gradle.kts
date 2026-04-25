@@ -75,8 +75,9 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
     testImplementation("org.springframework.batch:spring-batch-test")
-    testImplementation("org.testcontainers:junit-jupiter:$testcontainersVersion")
-    testImplementation("org.testcontainers:postgresql:$testcontainersVersion")
+    testImplementation("org.testcontainers:junit-jupiter:${testcontainersVersion}")
+    testImplementation("org.testcontainers:postgresql:${testcontainersVersion}")
+    testImplementation("org.testcontainers:jdbc:${testcontainersVersion}")
     testCompileOnly("org.projectlombok:lombok:$lombokVersion")
     testAnnotationProcessor("org.projectlombok:lombok:$lombokVersion")
 }
@@ -88,6 +89,14 @@ sourceSets {
             srcDir("build/generated/sources/annotationProcessor/java/main")
         }
     }
+    test {
+        java {
+            srcDirs("src/test/java")
+        }
+        resources {
+            srcDirs("src/test/resources")
+        }
+    }
 }
 
 dependencyCheck {
@@ -96,6 +105,41 @@ dependencyCheck {
     nvd.apiKey = System.getenv("NVD_API_KEY") ?: ""
 }
 
+
 tasks.withType<Test> {
     useJUnitPlatform()
+
+    testLogging {
+        events("passed", "skipped", "failed")
+
+        showExceptions = true
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+        showStackTraces = true
+        showStandardStreams = false
+    }
+
+    addTestListener(object : TestListener {
+        override fun beforeSuite(suite: TestDescriptor) {}
+        override fun beforeTest(testDescriptor: TestDescriptor) {}
+        override fun afterTest(testDescriptor: TestDescriptor, result: TestResult) {}
+        override fun afterSuite(suite: TestDescriptor, result: TestResult) {
+
+            if (suite.parent == null) {
+                println("\n" + "=".repeat(50))
+                println("Test Execution Summary")
+                println("=".repeat(50))
+                println("Result    : ${result.resultType}")
+                println("Total     : ${result.testCount} tests")
+                println("Passed    : ${result.successfulTestCount} tests")
+                println("Failed    : ${result.failedTestCount} tests")
+                println("Skipped   : ${result.skippedTestCount} tests")
+                println("=".repeat(50))
+            }
+        }
+    })
 }
+
+tasks.withType<ProcessResources> {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+

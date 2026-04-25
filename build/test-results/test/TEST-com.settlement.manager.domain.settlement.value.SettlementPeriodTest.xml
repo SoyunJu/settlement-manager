@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.settlement.manager.domain.settlement.value.SettlementPeriodTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-04-25T08:23:50" hostname="DESKTOP-M6T2B2N" time="0.017">
+  <properties/>
+  <testcase name="2월 1일 00:00 KST -&gt; 2월에 포함" classname="com.settlement.manager.domain.settlement.value.SettlementPeriodTest" time="0.001"/>
+  <testcase name="KST Instance start&lt;end 검증" classname="com.settlement.manager.domain.settlement.value.SettlementPeriodTest" time="0.001"/>
+  <testcase name="1월 1일 00:00 KST -&gt; 1월에 포함" classname="com.settlement.manager.domain.settlement.value.SettlementPeriodTest" time="0.001"/>
+  <testcase name="12월 31일 23:59 KST -&gt; 12월에 포함" classname="com.settlement.manager.domain.settlement.value.SettlementPeriodTest" time="0.0"/>
+  <testcase name="현재 월 -&gt; False" classname="com.settlement.manager.domain.settlement.value.SettlementPeriodTest" time="0.003"/>
+  <testcase name="1월 31일 23:30 KST -&gt; 1월에 포함" classname="com.settlement.manager.domain.settlement.value.SettlementPeriodTest" time="0.001"/>
+  <testcase name="윤년 2월 -&gt; 2월에 포함" classname="com.settlement.manager.domain.settlement.value.SettlementPeriodTest" time="0.0"/>
+  <testcase name="미래 월 -&gt; True" classname="com.settlement.manager.domain.settlement.value.SettlementPeriodTest" time="0.0"/>
+  <testcase name="잘못된 형식 -&gt; 예외" classname="com.settlement.manager.domain.settlement.value.SettlementPeriodTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
