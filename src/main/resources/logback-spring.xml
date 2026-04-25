@@ -3,7 +3,6 @@
 
     <property name="LOG_DIR" value="logs"/>
 
-    <!-- 로그 패턴 -->
     <property name="INFO_PATTERN"
               value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%X{traceId}] %logger{30} - %msg%n"/>
     <property name="ERROR_PATTERN"
@@ -11,14 +10,14 @@
     <property name="CONSOLE_PATTERN"
               value="%d{HH:mm:ss.SSS} %-5level [%X{traceId}] %logger{30} - %msg%n"/>
 
-    <!-- CONSOLE appender -->
+
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>${CONSOLE_PATTERN}</pattern>
         </encoder>
     </appender>
 
-    <!-- settlement info/error -->
+
     <appender name="SETTLEMENT_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_DIR}/settlement/settlement-info.log</file>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
@@ -27,7 +26,7 @@
             <onMismatch>DENY</onMismatch>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_DIR}/settlement/settlement-info.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${LOG_DIR}/settlement/%d{yyyy}/%d{MM}/%d{yyyy-MM-dd}-info.log</fileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder><pattern>${INFO_PATTERN}</pattern></encoder>
@@ -41,13 +40,13 @@
             <onMismatch>DENY</onMismatch>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_DIR}/settlement/settlement-error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${LOG_DIR}/settlement/%d{yyyy}/%d{MM}/%d{yyyy-MM-dd}-error.log</fileNamePattern>
             <maxHistory>90</maxHistory>
         </rollingPolicy>
         <encoder><pattern>${ERROR_PATTERN}</pattern></encoder>
     </appender>
 
-    <!-- sale info/error -->
+
     <appender name="SALE_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_DIR}/sale/sale-info.log</file>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
@@ -56,7 +55,7 @@
             <onMismatch>DENY</onMismatch>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_DIR}/sale/sale-info.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${LOG_DIR}/sale/%d{yyyy}/%d{MM}/%d{yyyy-MM-dd}-info.log</fileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder><pattern>${INFO_PATTERN}</pattern></encoder>
@@ -70,13 +69,13 @@
             <onMismatch>DENY</onMismatch>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_DIR}/sale/sale-error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${LOG_DIR}/sale/%d{yyyy}/%d{MM}/%d{yyyy-MM-dd}-error.log</fileNamePattern>
             <maxHistory>90</maxHistory>
         </rollingPolicy>
         <encoder><pattern>${ERROR_PATTERN}</pattern></encoder>
     </appender>
 
-    <!-- admin info/error (인증, 회원, 수수료, 스케줄러 등) -->
+
     <appender name="ADMIN_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_DIR}/admin/admin-info.log</file>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
@@ -85,7 +84,7 @@
             <onMismatch>DENY</onMismatch>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_DIR}/admin/admin-info.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${LOG_DIR}/admin/%d{yyyy}/%d{MM}/%d{yyyy-MM-dd}-info.log</fileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder><pattern>${INFO_PATTERN}</pattern></encoder>
@@ -99,23 +98,23 @@
             <onMismatch>DENY</onMismatch>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_DIR}/admin/admin-error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${LOG_DIR}/admin/%d{yyyy}/%d{MM}/%d{yyyy-MM-dd}-error.log</fileNamePattern>
             <maxHistory>90</maxHistory>
         </rollingPolicy>
         <encoder><pattern>${ERROR_PATTERN}</pattern></encoder>
     </appender>
 
-    <!-- audit log: 정산 상태 변경 감사. 1년 보관. -->
+
     <appender name="AUDIT" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_DIR}/audit/audit.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_DIR}/audit/audit.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${LOG_DIR}/audit/%d{yyyy}/%d{MM}/%d{yyyy-MM-dd}-audit.log</fileNamePattern>
             <maxHistory>365</maxHistory>
         </rollingPolicy>
         <encoder><pattern>${ERROR_PATTERN}</pattern></encoder>
     </appender>
 
-    <!-- 도메인별 로거 연결 -->
+
     <logger name="com.settlement.manager.domain.settlement" level="INFO" additivity="false">
         <appender-ref ref="SETTLEMENT_INFO"/>
         <appender-ref ref="SETTLEMENT_ERROR"/>
@@ -141,12 +140,11 @@
         <appender-ref ref="ADMIN_ERROR"/>
     </logger>
 
-    <!-- AUDIT_LOGGER: AuditLogger.java에서 직접 참조 -->
     <logger name="AUDIT_LOGGER" level="INFO" additivity="false">
         <appender-ref ref="AUDIT"/>
     </logger>
 
-    <!-- 환경별 root -->
+
     <springProfile name="local,test,default">
         <root level="DEBUG">
             <appender-ref ref="CONSOLE"/>
