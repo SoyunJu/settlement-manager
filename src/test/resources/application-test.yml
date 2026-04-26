@@ -3,6 +3,7 @@ spring:
     exclude:
       - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
       - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
+      - org.redisson.spring.starter.RedissonAutoConfigurationV2
   datasource:
     url: jdbc:postgresql://localhost:5532/settlement
     driver-class-name: org.postgresql.Driver
@@ -11,8 +12,8 @@ spring:
   data:
     redis:
       host: localhost
-      port: 6479
-      password: soyun1!
+      port: ${REDIS_PORT:6479}
+      password: ${REDIS_PASSWORD:}
   jpa:
     hibernate:
       ddl-auto: create-drop
