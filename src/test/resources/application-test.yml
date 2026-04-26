@@ -1,0 +1,39 @@
+spring:
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
+  datasource:
+    url: jdbc:postgresql://localhost:5532/settlement
+    driver-class-name: org.postgresql.Driver
+    username: ${DB_USER:soyun}
+    password: ${DB_PASSWORD:soyun1!}
+  data:
+    redis:
+      host: localhost
+      port: 6479
+      password: soyun1!
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: false
+  batch:
+    job:
+      enabled: false
+    jdbc:
+      initialize-schema: always
+
+app:
+  jwt:
+    secret: test-secret-key-minimum-32-characters!!
+    access-expiry-minutes: 15
+    refresh-expiry-days: 7
+  fee-rate:
+    default: 0.20
+  login:
+    max-attempts: 5
+  rate-limit:
+    window-minutes: 30

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="A05 - 보안 헤더" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-04-25T10:05:20" hostname="DESKTOP-M6T2B2N" time="0.194">
+  <properties/>
+  <testcase name="X-Content-Type-Options: nosniff 헤더 존재" classname="com.settlement.manager.infrastructure.security.SecurityTest$SecurityHeaderTests" time="0.111"/>
+  <testcase name="Actuator health 공개 접근 허용" classname="com.settlement.manager.infrastructure.security.SecurityTest$SecurityHeaderTests" time="0.012"/>
+  <testcase name="Swagger UI 공개 접근 허용" classname="com.settlement.manager.infrastructure.security.SecurityTest$SecurityHeaderTests" time="0.034"/>
+  <testcase name="X-Frame-Options: DENY 헤더 존재 (클릭재킹 방지)" classname="com.settlement.manager.infrastructure.security.SecurityTest$SecurityHeaderTests" time="0.015"/>
+  <testcase name="Actuator health/info 외 엔드포인트 차단" classname="com.settlement.manager.infrastructure.security.SecurityTest$SecurityHeaderTests" time="0.017"/>
+  <system-out><![CDATA[2026-04-25T19:05:20.952+09:00  INFO 18264 --- [settlement-manager] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.settlement.manager.infrastructure.security.SecurityTest$SecurityHeaderTests]: SecurityHeaderTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-04-25T19:05:20.955+09:00  INFO 18264 --- [settlement-manager] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.settlement.manager.SettlementManagerApplication for test class com.settlement.manager.infrastructure.security.SecurityTest$SecurityHeaderTests
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

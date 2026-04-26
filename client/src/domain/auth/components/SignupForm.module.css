@@ -1,0 +1,84 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    width: 340px;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 4px;
+    font-size: 20px;
+}
+
+.inputWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.label {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+}
+
+.input {
+    padding: 10px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-sm);
+}
+
+.input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.inputError {
+    border-color: var(--color-danger);
+}
+
+.select {
+    padding: 10px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-sm);
+    background-color: #fff;
+}
+
+.fieldError {
+    color: var(--color-danger);
+    font-size: 12px;
+}
+
+.error {
+    color: var(--color-danger);
+    font-size: 13px;
+    text-align: center;
+}
+
+.success {
+    color: var(--color-success);
+    font-size: 13px;
+    text-align: center;
+}
+
+.backLink {
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    font-size: 13px;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+    text-align: center;
+}

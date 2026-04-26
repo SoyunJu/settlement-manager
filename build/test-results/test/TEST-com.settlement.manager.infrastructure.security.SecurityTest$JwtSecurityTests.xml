@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="A02/A07 - JWT 보안" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-04-25T10:05:21" hostname="DESKTOP-M6T2B2N" time="0.072">
+  <properties/>
+  <testcase name="정상 토큰 파싱 성공" classname="com.settlement.manager.infrastructure.security.SecurityTest$JwtSecurityTests" time="0.039"/>
+  <testcase name="다른 Secret으로 서명된 토큰 -&gt; INVALID_TOKEN 예외" classname="com.settlement.manager.infrastructure.security.SecurityTest$JwtSecurityTests" time="0.005"/>
+  <testcase name="빈 문자열 토큰 -&gt; INVALID_TOKEN 예외" classname="com.settlement.manager.infrastructure.security.SecurityTest$JwtSecurityTests" time="0.003"/>
+  <testcase name="AccessToken과 RefreshToken은 서로 다른 값" classname="com.settlement.manager.infrastructure.security.SecurityTest$JwtSecurityTests" time="0.003"/>
+  <testcase name="위조된 서명 토큰 -&gt; INVALID_TOKEN 예외" classname="com.settlement.manager.infrastructure.security.SecurityTest$JwtSecurityTests" time="0.004"/>
+  <testcase name="만료된 토큰 -&gt; TOKEN_EXPIRED 예외" classname="com.settlement.manager.infrastructure.security.SecurityTest$JwtSecurityTests" time="0.007"/>
+  <testcase name="형식이 잘못된 토큰 -&gt; INVALID_TOKEN 예외" classname="com.settlement.manager.infrastructure.security.SecurityTest$JwtSecurityTests" time="0.006"/>
+  <system-out><![CDATA[2026-04-25T19:05:21.155+09:00  INFO 18264 --- [settlement-manager] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.settlement.manager.infrastructure.security.SecurityTest$JwtSecurityTests]: JwtSecurityTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-04-25T19:05:21.158+09:00  INFO 18264 --- [settlement-manager] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.settlement.manager.SettlementManagerApplication for test class com.settlement.manager.infrastructure.security.SecurityTest$JwtSecurityTests
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

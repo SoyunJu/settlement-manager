@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property name="LOG_DIR" value="logs"/>
+
+
+    <property name="INFO_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%X{traceId}] %logger{30} - %msg%n"/>
+    <property name="ERROR_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [traceId=%X{traceId}] [%X{method} %X{uri}] [userId=%X{userId}] %logger{30} - %msg%n%ex{10}"/>
+    <property name="CONSOLE_PATTERN"
+              value="%d{HH:mm:ss.SSS} %-5level [%X{traceId}] %logger{30} - %msg%n"/>
+
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="SETTLEMENT_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/settlement/settlement-info.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/settlement/%d{yyyy/MM/yyyy-MM-dd}-info.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder><pattern>${INFO_PATTERN}</pattern></encoder>
+    </appender>
+
+    <appender name="SETTLEMENT_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/settlement/settlement-error.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/settlement/%d{yyyy/MM/yyyy-MM-dd}-error.log</fileNamePattern>
+            <maxHistory>90</maxHistory>
+        </rollingPolicy>
+        <encoder><pattern>${ERROR_PATTERN}</pattern></encoder>
+    </appender>
+
+
+    <appender name="SALE_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/sale/sale-info.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/sale/%d{yyyy/MM/yyyy-MM-dd}-info.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder><pattern>${INFO_PATTERN}</pattern></encoder>
+    </appender>
+
+    <appender name="SALE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/sale/sale-error.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/sale/%d{yyyy/MM/yyyy-MM-dd}-error.log</fileNamePattern>
+            <maxHistory>90</maxHistory>
+        </rollingPolicy>
+        <encoder><pattern>${ERROR_PATTERN}</pattern></encoder>
+    </appender>
+
+
+    <appender name="ADMIN_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/admin/admin-info.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/admin/%d{yyyy/MM/yyyy-MM-dd}-info.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder><pattern>${INFO_PATTERN}</pattern></encoder>
+    </appender>
+
+    <appender name="ADMIN_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/admin/admin-error.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/admin/%d{yyyy/MM/yyyy-MM-dd}-error.log</fileNamePattern>
+            <maxHistory>90</maxHistory>
+        </rollingPolicy>
+        <encoder><pattern>${ERROR_PATTERN}</pattern></encoder>
+    </appender>
+
+
+    <appender name="AUDIT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/audit/audit.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/audit/%d{yyyy/MM/yyyy-MM-dd}-audit.log</fileNamePattern>
+            <maxHistory>365</maxHistory>
+        </rollingPolicy>
+        <encoder><pattern>${ERROR_PATTERN}</pattern></encoder>
+    </appender>
+
+
+    <logger name="com.settlement.manager.domain.settlement" level="INFO" additivity="false">
+        <appender-ref ref="SETTLEMENT_INFO"/>
+        <appender-ref ref="SETTLEMENT_ERROR"/>
+    </logger>
+
+    <logger name="com.settlement.manager.domain.sale" level="INFO" additivity="false">
+        <appender-ref ref="SALE_INFO"/>
+        <appender-ref ref="SALE_ERROR"/>
+    </logger>
+
+    <logger name="com.settlement.manager.domain.user" level="INFO" additivity="false">
+        <appender-ref ref="ADMIN_INFO"/>
+        <appender-ref ref="ADMIN_ERROR"/>
+    </logger>
+
+    <logger name="com.settlement.manager.domain.feerate" level="INFO" additivity="false">
+        <appender-ref ref="ADMIN_INFO"/>
+        <appender-ref ref="ADMIN_ERROR"/>
+    </logger>
+
+    <logger name="com.settlement.manager.infrastructure" level="INFO" additivity="false">
+        <appender-ref ref="ADMIN_INFO"/>
+        <appender-ref ref="ADMIN_ERROR"/>
+    </logger>
+
+
+    <logger name="AUDIT_LOGGER" level="INFO" additivity="false">
+        <appender-ref ref="AUDIT"/>
+    </logger>
+
+
+    <springProfile name="local,test,default">
+        <root level="DEBUG">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="prod">
+        <root level="WARN"/>
+    </springProfile>
+
+</configuration>

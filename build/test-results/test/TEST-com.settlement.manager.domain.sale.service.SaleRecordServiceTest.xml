@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.settlement.manager.domain.sale.service.SaleRecordServiceTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-04-25T10:05:04" hostname="DESKTOP-M6T2B2N" time="0.163">
+  <properties/>
+  <testcase name="환불액==결제액 -&gt; 허용 (전액 환불)" classname="com.settlement.manager.domain.sale.service.SaleRecordServiceTest" time="0.135"/>
+  <testcase name="ADMIN은 전체 판매 내역 조회 가능" classname="com.settlement.manager.domain.sale.service.SaleRecordServiceTest" time="0.007"/>
+  <testcase name="취소 IDOR 방지 -&gt; 타인의 판매 내역 취소시 FORBIDDEN" classname="com.settlement.manager.domain.sale.service.SaleRecordServiceTest" time="0.009"/>
+  <testcase name="환불액 &gt; 결제액 -&gt; 예외 처리" classname="com.settlement.manager.domain.sale.service.SaleRecordServiceTest" time="0.003"/>
+  <testcase name="IDOR 방지 -&gt; 타인의 판매 내역 조회 시 FORBIDDEN" classname="com.settlement.manager.domain.sale.service.SaleRecordServiceTest" time="0.003"/>
+  <system-out><![CDATA[2026-04-25T19:05:04.142+09:00  INFO   --- [    Test worker] c.s.m.d.sale.service.SaleRecordService   : 취소 내역 등록. originalSaleId=1 refundAmount=100000
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

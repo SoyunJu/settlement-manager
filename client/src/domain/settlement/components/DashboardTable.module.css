@@ -1,0 +1,60 @@
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.table th {
+    padding: 12px 16px;
+    background-color: var(--color-bg-light);
+    text-align: left;
+    border-bottom: 2px solid var(--color-border);
+    font-weight: 600;
+}
+
+.table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.toggleBtn {
+    border: none;
+    background: none;
+    font-size: 12px;
+    color: var(--color-text-secondary);
+}
+
+.detailRow td {
+    background-color: #fafafa;
+    padding: 0;
+}
+
+.detailBox {
+    padding: 16px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.detailGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.detailItem {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.label {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+}
+
+.actionRow {
+    display: flex;
+    gap: 8px;
+}
