@@ -51,7 +51,7 @@ npm run dev
 
 ## 테스트
 
-![테스트 결과](docs/images/test_result.png)
+![테스트 결과](docs/test_result.png)
 
 ```bash
 ./gradlew test
