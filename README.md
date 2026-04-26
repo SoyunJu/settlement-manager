@@ -6,29 +6,11 @@
 
 ---
 
-## 기술 스택
-
-| 항목 | 선택 |
-|------|------|
-| 언어 | Java 17 |
-| 프레임워크 | Spring Boot 3.3.0 |
-| 빌드 | Gradle 8.7 (Kotlin DSL) |
-| DB | PostgreSQL 16 |
-| 캐시 | Redis 7 |
-| 인증 | JWT (AccessToken 15분 + RefreshToken 7일) |
-| 배치 | Spring Batch 5 |
-| 문서 | Springdoc OpenAPI (Swagger UI) |
-| 인프라 | Docker Compose |
-| 프론트엔드 | React 18 + TypeScript + Vite |
-
----
-
 ## 로컬 실행 방법
 
 ### 사전 조건
 - Java 17
 - Docker Desktop (실행 중)
-- Node.js (프론트엔드)
 
 ### 백엔드
 
@@ -48,6 +30,7 @@ docker compose up -d
 ```
 
 ### 프론트엔드
+JWT 확인용 데모 (optional)
 
 ```bash
 cd client
@@ -63,6 +46,60 @@ npm run dev
 | Backend | http://localhost:8180 |
 | Swagger UI | http://localhost:8180/swagger-ui/index.html |
 | Frontend | http://localhost:3100 |
+
+---
+
+## 테스트
+
+![테스트 결과](docs/images/test_result.png)
+
+```bash
+./gradlew test
+
+# 리포트
+open build/reports/tests/test/index.html
+```
+
+| 테스트 파일 | 유형 | 주요 검증 |
+|-------------|------|-----------|
+| SettlementPeriodTest | 단위 | KST 월 경계값 (말일 23:30, 윤년 2월, 미래 월 감지) |
+| SettlementCalculatorTest | 단위 | 정산 계산 (정상/빈 월/부분 환불/소수점 반올림) |
+| FeeRateResolverTest | 단위 | 등급별 override, DB 없을 때 env 폴백 |
+| AuthServiceTest | 단위 | 로그인 5회 잠금, 탈퇴 계정, 로그아웃 Redis 삭제 |
+| SaleRecordServiceTest | 단위 | IDOR 방지, 환불 초과 예외, 전액 환불 허용 |
+| SettlementIntegrationTest | 통합 | 실 DB 기반 정산 생성, 중복 방지 |
+| SettlementConcurrencyTest | 통합 | 동시 확정 10스레드 — 1번만 성공 |
+| SecurityTest | 통합 | JWT 위변조/만료, 접근제어, 보안 헤더 |
+
+---
+
+## 주요 설계 결정
+
+| 결정 | 이유 |
+|------|------|
+| paidAt(TIMESTAMPTZ) + paidAtKst(TIMESTAMP) 병행 | UTC로 계산 정확성 보장. KST 컬럼은 DB 관리자 육안 확인 전용. 계산에 미사용. |
+| SettlementPeriod 값 객체 | KST 월 경계 계산 로직 캡슐화. 경계값 단위 테스트 독립 실행 가능. |
+| 비관적 락 (PESSIMISTIC_WRITE) | 정산 확정 동시 요청 방지. 낙관적 락 대비 재시도 로직 불필요. |
+| UNIQUE 제약 + 서비스 레이어 중복 체크 병행 | DB 제약은 최후 방어선. 서비스 레이어에서 먼저 체크해 명확한 에러 코드 반환. |
+| FeeRate 이력 테이블 + 시점 기준 조회 | 수수료율 변경 후에도 과거 정산은 당시 수수료율로 재계산 가능. |
+| Soft Delete | 정산 이력과 연결된 User 하드 삭제 불가. deletedAt 기록으로 이력 보존. |
+
+---
+
+## AI 활용 범위
+
+| 영역 | AI 활용도 | 직접 판단 영역 |
+|------|-----------|---------------|
+| 엔티티·DTO 스캐폴딩 | 높음 | 필드 설계, KST 컬럼 병행 여부 결정 |
+| CRUD API 기본 구조 | 높음 | IDOR 검증 위치, 응답 구조 설계 |
+| KST 월 경계 처리 | 낮음 | TIMESTAMPTZ + paidAtKst 병행 설계 근거 직접 판단 |
+| 정산 계산 로직 | 낮음 | 수수료율 시점 조회 기준, FeeRateResolver 설계 직접 판단 |
+| 정산 중복 방지 | 낮음 | UNIQUE 제약 + 비관적 락 조합 직접 결정 |
+| 로그인 잠금 정책 | 중간 | 잠금 해제 권한 범위, 카운트 초기화 시점 직접 결정 |
+| Spring Batch 설계 | 낮음 | Job 구조, 청크 크기, skip 정책 직접 결정 |
+| 테스트 시나리오 | 낮음 | 경계값·동시성·IDOR 시나리오 직접 정의 |
+| 보안 설정 | 중간 | OWASP 항목별 적용 여부 직접 검토·확인 |
+| React UI 구조 | 높음 | DDD 기반 컴포넌트 책임 분리 방식 직접 결정 |
 
 ---
 
@@ -178,28 +215,6 @@ RoleHierarchy: `ROLE_ADMIN > ROLE_OPERATOR > ROLE_CREATOR`
 
 ---
 
-## 테스트
-
-```bash
-./gradlew test
-
-# 리포트
-open build/reports/tests/test/index.html
-```
-
-| 테스트 파일 | 유형 | 주요 검증 |
-|-------------|------|-----------|
-| SettlementPeriodTest | 단위 | KST 월 경계값 (말일 23:30, 윤년 2월, 미래 월 감지) |
-| SettlementCalculatorTest | 단위 | 정산 계산 (정상/빈 월/부분 환불/소수점 반올림) |
-| FeeRateResolverTest | 단위 | 등급별 override, DB 없을 때 env 폴백 |
-| AuthServiceTest | 단위 | 로그인 5회 잠금, 탈퇴 계정, 로그아웃 Redis 삭제 |
-| SaleRecordServiceTest | 단위 | IDOR 방지, 환불 초과 예외, 전액 환불 허용 |
-| SettlementIntegrationTest | 통합 | 실 DB 기반 정산 생성, 중복 방지 |
-| SettlementConcurrencyTest | 통합 | 동시 확정 10스레드 — 1번만 성공 |
-| SecurityTest | 통합 | JWT 위변조/만료, 접근제어, 보안 헤더 |
-
----
-
 ## 보안 (OWASP Top 10)
 
 | 항목 | 적용 |
@@ -213,30 +228,17 @@ open build/reports/tests/test/index.html
 
 ---
 
-## 주요 설계 결정
+## 기술 스택
 
-| 결정 | 이유 |
+| 항목 | 선택 |
 |------|------|
-| paidAt(TIMESTAMPTZ) + paidAtKst(TIMESTAMP) 병행 | UTC로 계산 정확성 보장. KST 컬럼은 DB 관리자 육안 확인 전용. 계산에 미사용. |
-| SettlementPeriod 값 객체 | KST 월 경계 계산 로직 캡슐화. 경계값 단위 테스트 독립 실행 가능. |
-| 비관적 락 (PESSIMISTIC_WRITE) | 정산 확정 동시 요청 방지. 낙관적 락 대비 재시도 로직 불필요. |
-| UNIQUE 제약 + 서비스 레이어 중복 체크 병행 | DB 제약은 최후 방어선. 서비스 레이어에서 먼저 체크해 명확한 에러 코드 반환. |
-| FeeRate 이력 테이블 + 시점 기준 조회 | 수수료율 변경 후에도 과거 정산은 당시 수수료율로 재계산 가능. |
-| Soft Delete | 정산 이력과 연결된 User 하드 삭제 불가. deletedAt 기록으로 이력 보존. |
-
----
-
-## AI 활용 범위
-
-| 영역 | AI 활용도 | 직접 판단 영역 |
-|------|-----------|---------------|
-| 엔티티·DTO 스캐폴딩 | 높음 | 필드 설계, KST 컬럼 병행 여부 결정 |
-| CRUD API 기본 구조 | 높음 | IDOR 검증 위치, 응답 구조 설계 |
-| KST 월 경계 처리 | 낮음 | TIMESTAMPTZ + paidAtKst 병행 설계 근거 직접 판단 |
-| 정산 계산 로직 | 낮음 | 수수료율 시점 조회 기준, FeeRateResolver 설계 직접 판단 |
-| 정산 중복 방지 | 낮음 | UNIQUE 제약 + 비관적 락 조합 직접 결정 |
-| 로그인 잠금 정책 | 중간 | 잠금 해제 권한 범위, 카운트 초기화 시점 직접 결정 |
-| Spring Batch 설계 | 낮음 | Job 구조, 청크 크기, skip 정책 직접 결정 |
-| 테스트 시나리오 | 낮음 | 경계값·동시성·IDOR 시나리오 직접 정의 |
-| 보안 설정 | 중간 | OWASP 항목별 적용 여부 직접 검토·확인 |
-| React UI 구조 | 높음 | DDD 기반 컴포넌트 책임 분리 방식 직접 결정 |
+| 언어 | Java 17 |
+| 프레임워크 | Spring Boot 3.3.0 |
+| 빌드 | Gradle 8.7 (Kotlin DSL) |
+| DB | PostgreSQL 16 |
+| 캐시 | Redis 7 |
+| 인증 | JWT (AccessToken 15분 + RefreshToken 7일) |
+| 배치 | Spring Batch 5 |
+| 문서 | Springdoc OpenAPI (Swagger UI) |
+| 인프라 | Docker Compose |
+| 프론트엔드 | React 18 + TypeScript + Vite |
